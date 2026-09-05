@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEUTSCH NEO • Lektion 13</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Neon Cyberpunk Palette - Premium Dark */
+            --bg-base: #090d16;
+            --bg-surface: rgba(18, 24, 38, 0.75);
+            --border-glow: rgba(56, 189, 248, 0.25);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            
+            --neon-primary: #38bdf8;   /* Cyan Glow */
+            --neon-secondary: #c084fc; /* Violet Glow */
+            --neon-accent: #f43f5e;    /* Rose Accent */
+            --gold-star: #fbbf24;
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            --glass-blur: blur(16px);
+            --card-radius: 20px;
+        }
+
+        [data-theme="light"] {
+            /* Futuristic Clean Light Mode */
+            --bg-base: #f0f4f9;
+            --bg-surface: rgba(255, 255, 255, 0.85);
+            --border-glow: rgba(14, 165, 233, 0.3);
+            --border-subtle: rgba(0, 0, 0, 0.08);
+            
+            --neon-primary: #0284c7;
+            --neon-secondary: #9333ea;
+            --neon-accent: #e11d48;
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Space Grotesk', sans-serif;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(192, 132, 252, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        /* Futuristic Header */
+        header {
+            background: var(--bg-surface);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-glow);
+            padding: 35px 25px;
+            border-radius: var(--card-radius);
+            text-align: center;
+            position: relative;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glow);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: 0 0 15px var(--neon-primary);
+            transform: scale(1.05);
+        }
+
+        .chip-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--neon-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Controls Area */
+        .controls-card {
+            background: var(--bg-surface);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--card-radius);
+            padding: 25px;
+            margin-bottom: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border-radius: 14px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--neon-primary);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-primary);
+            font-size: 1.2rem;
+        }
+
+        /* Category Capsule Nav */
+        .categories-nav {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .categories-nav::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .cat-btn.active {
+            background: linear-gradient(135deg, var(--neon-primary), var(--neon-secondary));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .cat-btn:hover:not(.active) {
+            border-color: var(--neon-primary);
+            color: var(--text-main);
+        }
+
+        /* Controls Bar */
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .control-group select, .control-group input[type="range"] {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        /* Futuristic Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
+            transition: .3s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text-muted);
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: var(--neon-primary);
+            border-color: var(--neon-primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+            background-color: #fff;
+        }
+
+        /* Section Title */
+        .section-header {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin: 35px 0 18px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+        }
+
+        .section-header span {
+            color: var(--neon-primary);
+        }
+
+        /* Vocabulary Cards Grid */
+        .words-grid, .sentences-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Neo-Card Element */
+        .neo-card {
+            background: var(--bg-surface);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--card-radius);
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neo-card:hover {
+            border-color: var(--neon-primary);
+            transform: translateY(-3px) scale(1.005);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        .card-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .german-box {
+            direction: ltr;
+            text-align: left;
+            flex: 1;
+        }
+
+        .german-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
+        }
+
+        .badge-cat {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--neon-primary);
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+
+        .arabic-box {
+            text-align: right;
+            flex: 1;
+        }
+
+        .arabic-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Blur Feature */
+        .hide-arabic .arabic-text {
+            filter: blur(8px);
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .hide-arabic .arabic-text:hover, .hide-arabic .arabic-text.revealed {
+            filter: blur(0);
+        }
+
+        .hide-german .german-text {
+            filter: blur(8px);
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .hide-german .german-text:hover, .hide-german .german-text.revealed {
+            filter: blur(0);
+        }
+
+        /* Action Buttons */
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 15px;
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-action:hover {
+            color: var(--neon-primary);
+            border-color: var(--neon-primary);
+            background: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        .btn-action.fav-btn.active {
+            color: var(--gold-star);
+            border-color: var(--gold-star);
+            background: rgba(251, 191, 36, 0.1);
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.3);
+        }
+
+        .btn-action.play-btn {
+            color: var(--neon-primary);
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        .btn-action.play-btn:hover {
+            background: var(--neon-primary);
+            color: #fff;
+        }
+
+        .btn-action.play-btn.playing {
+            background: var(--neon-accent);
+            color: #fff;
+            border-color: var(--neon-accent);
+            animation: pulse-neon 1.2s infinite;
+        }
+
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.5); }
+            70% { box-shadow: 0 0 0 12px rgba(244, 63, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+            width: 100%;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 20px 10px; }
+            .neo-card { flex-direction: column; align-items: stretch; gap: 15px; }
+            .card-body { flex-direction: row; justify-content: space-between; }
+            .card-actions { justify-content: flex-end; margin-right: 0; }
+            .controls-bar { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" title="تغيير المظهر">🌙</button>
+        <div class="chip-tag">NEO VOCABULARY • LEKTION 13</div>
+        <h1>DEUTSCH MASTER 13</h1>
+        <p class="subtitle">تجربة ألمانية تفاعلية ثلاثية الأبعاد للنطق والحفظ بدون إنترنت 100%</p>
+    </header>
+
+    <div class="controls-card">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="ابحث فوراً بالكلمة الألمانية أو الترجمة العربية..." oninput="filterWords()">
+        </div>
+
+        <div class="categories-nav">
+            <button class="cat-btn active" id="cat-all" onclick="setCategory('all')">🌐 الكل</button>
+            <button class="cat-btn" id="cat-verbs" onclick="setCategory('verbs')">⚡ الأفعال (Verben)</button>
+            <button class="cat-btn" id="cat-nouns" onclick="setCategory('nouns')">📦 الأسماء (Nomen)</button>
+            <button class="cat-btn" id="cat-adj" onclick="setCategory('adj')">🎨 الصفات (Adjektive)</button>
+            <button class="cat-btn" id="cat-other" onclick="setCategory('other')">🧩 أخرى (Sonstiges)</button>
+            <button class="cat-btn" id="cat-fav" onclick="setCategory('favorites')">⭐ المفضلة</button>
+        </div>
+
+        <div class="controls-bar">
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="control-group">
+                    <span>السرعة:</span>
+                    <input type="range" id="speech-rate" min="0.5" max="1.5" step="0.1" value="0.8" onchange="updateRateValue(this.value)">
+                    <span id="rate-value" style="color: var(--neon-primary);">0.8x</span>
+                </div>
+                <div class="control-group">
+                    <span>الصوت:</span>
+                    <select id="voice-select" onchange="saveSelectedVoice()"></select>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <div class="control-group">
+                    <span>إخفاء العربي</span>
+                    <label class="switch">
+                        <input type="checkbox" id="hide-trans-toggle" onchange="toggleHideTranslation()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="control-group">
+                    <span>إخفاء الألماني</span>
+                    <label class="switch">
+                        <input type="checkbox" id="hide-german-toggle" onchange="toggleHideGerman()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="control-group">
+                    <span>ترتيب عشوائي</span>
+                    <label class="switch">
+                        <input type="checkbox" id="shuffle-toggle" onchange="toggleShuffle()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">
+        <span>📑</span> قائمة الكلمات المطلوبة (<span id="words-count">0</span>)
+    </div>
+    <div class="words-grid" id="words-container"></div>
+
+    <div class="section-header">
+        <span>🗺️</span> موضوع وصف الطريق (Wegbeschreibung)
+    </div>
+    <div class="sentences-grid" id="sentences-container"></div>
+</div>
+
+<footer>
+    <p>قاموس ألماني ذكي • يعمل 100% أوفلاين مع محرك Web Speech الاصطناعي</p>
+</footer>
+
+<script>
+    const vocabulary = [
+        // Verben
+        { german: "abbiegen", arabic: "ينحني / يحود", category: "verbs" },
+        { german: "anmachen", arabic: "يشغل", category: "verbs" },
+        { german: "stimmen", arabic: "يصح", category: "verbs" },
+        { german: "wenden", arabic: "يلف", category: "verbs" },
+        { german: "weiterfahren", arabic: "يستمر في الذهاب", category: "verbs" },
+        { german: "zurückfahren", arabic: "يعود", category: "verbs" },
+        { german: "durchkommen", arabic: "يعبر", category: "verbs" },
+        { german: "eintragen", arabic: "يدخل بيانات", category: "verbs" },
+        { german: "vorbeifahren", arabic: "يمر راكباً ويتخطى شيء", category: "verbs" },
+
+        // Nomen
+        { german: "der Blick, -e", arabic: "النظرة", category: "nouns" },
+        { german: "der Kilometer, -", arabic: "الكيلومتر", category: "nouns" },
+        { german: "der Moment, -e", arabic: "اللحظة", category: "nouns" },
+        { german: "der Navigator, en", arabic: "جهاز الملاحة", category: "nouns" },
+        { german: "der Plan, die Pläne", arabic: "الخريطة / الخطة", category: "nouns" },
+        { german: "der Platz, die Plätze", arabic: "المكان", category: "nouns" },
+        { german: "der Stab, die Stäbe", arabic: "العصا", category: "nouns" },
+        { german: "der Stadtplan, -pläne", arabic: "خريطة المدينة", category: "nouns" },
+        { german: "der Würfel, -", arabic: "المكعب", category: "nouns" },
+        { german: "das Gedächtnis, -se", arabic: "الذاكرة", category: "nouns" },
+        { german: "das Zentrum, die Zentren", arabic: "المركز", category: "nouns" },
+        { german: "die Ampel, n", arabic: "إشارة المرور", category: "nouns" },
+        { german: "die Institution, en", arabic: "مؤسسة / منشأة", category: "nouns" },
+        { german: "die Nähe, -", arabic: "القرب", category: "nouns" },
+        { german: "die Polizei, en", arabic: "البوليس", category: "nouns" },
+        { german: "die Post, en", arabic: "البريد", category: "nouns" },
+        { german: "die Pyramide, n", arabic: "الهرم", category: "nouns" },
+        { german: "die Stadtmitte, n", arabic: "وسط المدينة", category: "nouns" },
+        { german: "die Wegbeschreibung, en", arabic: "وصف الطريق", category: "nouns" },
+
+        // Adjektive
+        { german: "fremd", arabic: "غريب / أجنبي", category: "adj" },
+
+        // Sonstiges
+        { german: "links", arabic: "على اليسار", category: "other" },
+        { german: "rechts", arabic: "على اليمين", category: "other" },
+        { german: "trotzdem", arabic: "بالرغم من ذلك", category: "other" },
+        { german: "nun", arabic: "الآن", category: "other" },
+        { german: "hinten", arabic: "في الخلف", category: "other" },
+        { german: "vorn", arabic: "في المقدمة", category: "other" },
+        { german: "oben", arabic: "في الأعلى", category: "other" },
+        { german: "unten", arabic: "في الأسفل", category: "other" }
+    ];
+
+    const dailySentences = [
+        { german: "Ich beschreibe den Weg zur Stadtmitte.", arabic: "أنا أصف الطريق إلى وسط المدينة." },
+        { german: "Sie fahren zuerst geradeaus und dann nach rechts.", arabic: "تسير أولاً إلى الأمام مباشرة ثم إلى اليمين." },
+        { german: "Sie fahren die nächste Straße links.", arabic: "تأخذ الشارع القادم يساراً." },
+        { german: "Sie biegen rechts ab.", arabic: "تنعطف يميناً." },
+        { german: "Die Stadtmitte ist in der Nähe von der Post.", arabic: "وسط المدينة يقع بالقرب من مكتب البريد." },
+        { german: "Und dann sehen Sie die Stadtmitte schon.", arabic: "وبعد ذلك ستجد وسط المدينة أمامك مباشرة." }
+    ];
+
+    let currentCategory = 'all';
+    let favorites = JSON.parse(localStorage.getItem('german_favs_neo')) || [];
+    let isShuffleActive = false;
+    let currentlyPlayingText = null;
+
+    const categoryLabels = { verbs: 'فعل', nouns: 'اسم', adj: 'صفة', other: 'أخرى' };
+
+    window.addEventListener('DOMContentLoaded', () => {
+        loadTheme();
+        initSpeech();
+        renderWords();
+        renderSentences();
+    });
+
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('theme_neo') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-btn').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme_neo', newTheme);
+        document.getElementById('theme-btn').innerText = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function initSpeech() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = populateVoices;
+            populateVoices();
+        }
+    }
+
+    function populateVoices() {
+        const select = document.getElementById('voice-select');
+        select.innerHTML = '';
+        const voices = window.speechSynthesis.getVoices();
+        const deVoices = voices.filter(v => v.lang.toLowerCase().includes('de'));
+        
+        if (deVoices.length > 0) {
+            deVoices.forEach(v => {
+                const opt = document.createElement('option');
+                opt.value = v.name;
+                opt.innerText = `${v.name.replace(/Google|Microsoft|Apple/g, '').trim()}`;
+                select.appendChild(opt);
+            });
+            select.value = localStorage.getItem('german_voice_neo') || deVoices[0].name;
+        } else {
+            select.innerHTML = '<option>افتراضي الصوت</option>';
+        }
+    }
+
+    function saveSelectedVoice() {
+        localStorage.setItem('german_voice_neo', document.getElementById('voice-select').value);
+    }
+
+    function updateRateValue(val) {
+        document.getElementById('rate-value').innerText = val + 'x';
+    }
+
+    function speakText(text, btnElement) {
+        if (!('speechSynthesis' in window)) return;
+
+        if (window.speechSynthesis.speaking && currentlyPlayingText === text) {
+            window.speechSynthesis.cancel();
+            currentlyPlayingText = null;
+            resetPlayButtons();
+            return;
+        }
+
+        window.speechSynthesis.cancel();
+        resetPlayButtons();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'de-DE';
+        utterance.rate = parseFloat(document.getElementById('speech-rate').value || 0.8);
+
+        const voiceSelect = document.getElementById('voice-select');
+        if (voiceSelect && voiceSelect.value) {
+            const chosen = window.speechSynthesis.getVoices().find(v => v.name === voiceSelect.value);
+            if (chosen) utterance.voice = chosen;
+        }
+
+        currentlyPlayingText = text;
+        if (btnElement) btnElement.classList.add('playing');
+
+        utterance.onend = utterance.onerror = () => {
+            currentlyPlayingText = null;
+            resetPlayButtons();
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function resetPlayButtons() {
+        document.querySelectorAll('.play-btn').forEach(b => b.classList.remove('playing'));
+    }
+
+    function toggleFavorite(germanWord) {
+        if (favorites.includes(germanWord)) {
+            favorites = favorites.filter(item => item !== germanWord);
+        } else {
+            favorites.push(germanWord);
+        }
+        localStorage.setItem('german_favs_neo', JSON.stringify(favorites));
+        renderWords();
+    }
+
+    function toggleHideTranslation() {
+        document.getElementById('words-container').classList.toggle('hide-arabic', document.getElementById('hide-trans-toggle').checked);
+    }
+
+    function toggleHideGerman() {
+        document.getElementById('words-container').classList.toggle('hide-german', document.getElementById('hide-german-toggle').checked);
+    }
+
+    function toggleShuffle() {
+        isShuffleActive = document.getElementById('shuffle-toggle').checked;
+        renderWords();
+    }
+
+    function shuffleArray(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function setCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`cat-${cat}`).classList.add('active');
+        renderWords();
+    }
+
+    function filterWords() { renderWords(); }
+
+    function renderWords() {
+        const container = document.getElementById('words-container');
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+        container.innerHTML = '';
+
+        let filtered = vocabulary;
+        if (currentCategory === 'favorites') {
+            filtered = vocabulary.filter(item => favorites.includes(item.german));
+        } else if (currentCategory !== 'all') {
+            filtered = vocabulary.filter(item => item.category === currentCategory);
+        }
+
+        if (query) {
+            filtered = filtered.filter(item => item.german.toLowerCase().includes(query) || item.arabic.includes(query));
+        }
+
+        if (isShuffleActive) filtered = shuffleArray(filtered);
+
+        document.getElementById('words-count').innerText = filtered.length;
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">لا يوجد مفردات مطابقة</div>`;
+            return;
+        }
+
+        filtered.forEach(item => {
+            const isFav = favorites.includes(item.german);
+            const card = document.createElement('div');
+            card.className = 'neo-card';
+
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="german-box">
+                        <div class="german-text" onclick="this.classList.toggle('revealed')">${item.german}</div>
+                        <span class="badge-cat">${categoryLabels[item.category] || ''}</span>
+                    </div>
+                    <div class="arabic-box">
+                        <span class="arabic-text" onclick="this.classList.toggle('revealed')">${item.arabic}</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-action fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${item.german.replace(/'/g, "\\'")}')" title="أضف للمفضلة">
+                        ★
+                    </button>
+                    <button class="btn-action play-btn" onclick="speakText('${item.german.replace(/'/g, "\\'")}', this)" title="استمع للنطق">
+                        🔊
+                    </button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        toggleHideTranslation();
+        toggleHideGerman();
+    }
+
+    function renderSentences() {
+        const container = document.getElementById('sentences-container');
+        container.innerHTML = '';
+
+        dailySentences.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'neo-card';
+            
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="german-box">
+                        <div class="german-text">${item.german}</div>
+                    </div>
+                    <div class="arabic-box">
+                        <span class="arabic-text">${item.arabic}</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-action play-btn" onclick="speakText('${item.german.replace(/'/g, "\\'")}', this)" title="استمع للجملة">
+                        🔊
+                    </button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+</script>
+
+</body>
+</html>
